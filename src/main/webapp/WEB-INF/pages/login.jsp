@@ -10,28 +10,19 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h2>Custom Form based Login Page</h2>
-    <c:if test="${'fail' eq param.auth}">
-      <div style="color:red">
-        Login Failed!!!<br />
-        Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
-      </div>
-    </c:if>
-    <p class="lead"> Please, enter yours user credentials</p>
+    <h2>Please, enter your login and password</h2>
     <form action="${pageContext.request.contextPath}/login" method="post">
-      <table>
-        <tr>
-          <td>Username:</td>
-          <td><input type='text' name='username' /></td>
-        </tr>
-        <tr>
-          <td>Password:</td>
-          <td><input type='password' name='password'></td>
-        </tr>
-        <tr>
-          <td colspan='2'><input name="submit" type="submit" value="Submit"></td>
-        </tr>
-      </table>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="form-control" required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="form-control" required/>
+      </div>
+
+      <button name="submit" type="submit" class="btn btn-success">Submit</button>
+
     </form>
   </div>
 </div>
