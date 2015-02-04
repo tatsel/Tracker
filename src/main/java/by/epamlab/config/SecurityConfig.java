@@ -38,8 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/home/**").access("hasRole('SUPERADMIN') or hasRole('ROLE_USER')")
+                .antMatchers("/home/**").access("hasRole('SUPERADMIN') or hasRole('USER') or hasRole('TASKADMIN')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_SUPERADMIN')")
+                .antMatchers("/users/**").access("hasRole('SUPERADMIN')")
                 .antMatchers("/dba/**").access("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_DBA')")
                 .and().formLogin()
                 .loginPage("/login").failureUrl("/login?error")

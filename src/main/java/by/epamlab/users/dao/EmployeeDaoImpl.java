@@ -29,4 +29,28 @@ public class EmployeeDaoImpl implements EmployeeDao{
             return null;
         }
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Employee> findEmployees() {
+        List<Employee> employees = new ArrayList<Employee>();
+        employees = sessionFactory.getCurrentSession()
+                .createQuery("from Employee")
+                .list();
+        return employees;
+    }
+
+    @Override
+    public void addUser(Employee user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
+
+    @Override
+    public void deleteUser(Integer id) {
+        sessionFactory.getCurrentSession()
+        .createQuery("delete from Employee where id= :id")
+        .setString("id", Integer.toString(id)).executeUpdate();
+    }
+
+
 }

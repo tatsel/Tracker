@@ -1,6 +1,6 @@
-
+<%--<%@page session="false"%>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page session="false"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
@@ -16,10 +16,11 @@
 
 <body>
 <div class="container">
+  <jsp:include page="header.jsp"></jsp:include>
   <div class="jumbotron">
     <h1>${message}</h1>
     <p class="lead"> Now, you can logout, lol</p>
-    <div id="head">
+   <%-- <div id="head">
       Hello, <b>${pageContext.request.userPrincipal.name}; </b>
       </div>
     <sec:authorize access="hasRole('SUPERADMIN')">
@@ -29,7 +30,7 @@
     </sec:authorize>
     <a class="btn btn-lg btn-success" role="button" href="${pageContext.request.contextPath}/logout">
       Log Out
-    </a>
+    </a>--%>
   </div>
 </div>
 

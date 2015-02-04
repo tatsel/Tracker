@@ -1,7 +1,7 @@
 package by.epamlab.config;
 
-import org.hibernate.SessionFactory;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan({ "by.epamlab.*" })
+@ComponentScan({"by.epamlab.*"})
 @EnableTransactionManagement
 @Import({ SecurityConfig.class })
 public class AppConfig extends WebMvcConfigurerAdapter{

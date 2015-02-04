@@ -20,6 +20,14 @@
         </fileset>
       </configuration>
     </facet>
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="sessionFactory" value="d2d64e66-d516-4b2d-9e59-09a6dc60ff7e" />
+        </datasource-map>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -66,5 +74,7 @@
     <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-taglibs:3.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-acl:3.2.5.RELEASE" level="project" />
+    <orderEntry type="library" name="angularjs-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="jQuery-2.0.0" level="application" />
   </component>
 </module>

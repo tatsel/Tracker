@@ -1,23 +1,25 @@
-package by.epamlab.users.model;
+package by.epamlab.projects.model;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "siterole", catalog = "trackerdb")
-public class UserRole {
+@Table(name = "status", catalog = "trackerdb")
+public class Status {
 
     private Integer id;
     private String name;
 
-    public UserRole(){}
+    public Status() {
+    }
 
-    public UserRole(String name) {
+    public Status(Integer id, String name) {
+        this.id = id;
         this.name = name;
     }
 
     @Id
     @GeneratedValue
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(name = "ID", nullable = false, unique = true)
     public Integer getId() {
         return id;
     }
@@ -26,17 +28,12 @@ public class UserRole {
         this.id = id;
     }
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return id+";"+name;
     }
 }

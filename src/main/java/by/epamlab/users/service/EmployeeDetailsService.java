@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service("userDetailsService")
 public class EmployeeDetailsService implements UserDetailsService{
@@ -43,16 +41,17 @@ public class EmployeeDetailsService implements UserDetailsService{
                 user.isEnabled(), true, true, true, authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority(UserRole userRole) {
 
-        Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
+        //Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
         // Build user's authorities
-        for (UserRole userRole : userRoles) {
+        /*for (UserRole userRole : userRoles) {
             setAuths.add(new SimpleGrantedAuthority(userRole.getName()));
-        }
+        }*/
 
-        List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
+        List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>();
+        Result.add(new SimpleGrantedAuthority(userRole.getName()));
 
         return Result;
     }

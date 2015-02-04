@@ -2,11 +2,16 @@ package by.epamlab.users.dao;
 
 import by.epamlab.users.model.Employee;
 
-/**
- * Created by Aliaksandr_Asiptsou on 1/20/2015.
- */
+import java.util.List;
+
+
 public interface EmployeeDao {
 
     Employee findByLogin(String login);
 
+    List<Employee> findEmployees();
+
+    void addUser(Employee user);
+
+    void deleteUser(Integer id);
 }

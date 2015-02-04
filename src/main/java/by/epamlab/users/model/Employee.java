@@ -1,8 +1,6 @@
 package by.epamlab.users.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "employee", catalog = "trackerdb")
@@ -14,12 +12,12 @@ public class Employee {
     private String login;
     private String password;
     private Position position;
-    private Set<UserRole> userRole = new HashSet<UserRole>(0);
+    private UserRole userRole;
     private boolean enabled;
 
     public Employee() {}
 
-    public Employee(String firstname, String lastname, String login, String password, Position position, Set<UserRole> userRole) {
+    public Employee(String firstname, String lastname, String login, String password, Position position, UserRole userRole) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.login = login;
@@ -41,7 +39,7 @@ public class Employee {
         this.id = id;
     }
 
-    @Column(name = "FIRSTNAME")
+    @Column(name = "FIRSTNAME", nullable = false)
     public String getFirstname() {
         return firstname;
     }
@@ -72,7 +70,7 @@ public class Employee {
         this.login = login;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "POSITIONID")
     public Position getPosition() {
         return position;
@@ -91,17 +89,21 @@ public class Employee {
         this.password = password;
     }
 
-    @OneToMany
-    @JoinColumn(name = "ID")
-    public Set<UserRole> getUserRole() {
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "SITEROLEID")
+    public UserRole getUserRole() {
         return this.userRole;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
+    public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public String toString() {
+        return id+";"+firstname+";"+lastname+";"+userRole+";"+position;
     }
 }

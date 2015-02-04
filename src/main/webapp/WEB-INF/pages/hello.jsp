@@ -16,7 +16,7 @@
     <div class="jumbotron">
         <h1>${message}</h1>
         <p class="lead"> Please, login to proceed</p>
-        <a class="btn btn-lg btn-success" role="button" href="/home">
+        <a class="btn btn-lg btn-success" role="button" href="${pageContext.request.contextPath}/home">
             Log In
         </a>
     </div>

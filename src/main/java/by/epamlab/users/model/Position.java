@@ -8,6 +8,7 @@ public class Position {
 
     private Integer id;
     private String name;
+    //private Set<Employee> employees;
 
     public Position() {
     }
@@ -27,7 +28,7 @@ public class Position {
         this.id = id;
     }
 
-    @Column(name = "NAME", unique = true, nullable = false)
+    @Column(name = "NAME", nullable = false)
     public String getName() {
         return name;
     }
@@ -35,4 +36,18 @@ public class Position {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return id+"; name: "+name;
+    }
+
+    /*@OneToMany(mappedBy = "position")
+    public Set<Employee> getUsers() {
+        return employees;
+    }*/
+
+    /*public void setUsers(Set<Employee> employees) {
+        this.employees = employees;
+    }*/
 }
