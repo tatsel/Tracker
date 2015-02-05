@@ -18,28 +18,22 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Login</th>
-                <th>PositionID</th>
                 <th>Position</th>
-                <th>SiteroleID</th>
                 <th>Siterole</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${usersList}" var="user">
                 <tr>
-                    <td>${user.id}</td>
                     <td>${user.firstname}</td>
                     <td>${user.lastname}</td>
                     <td>${user.login}</td>
-                    <td>${user.position.id}</td>
                     <td>${user.position.name}</td>
-                    <td>${user.userRole.id}</td>
                     <td>${user.userRole.name}</td>
-                    <td><a href="<c:url value='${pageContext.request.contextPath}/users/deleteUser/${user.id}'/>">Delete User</a></li></td>
+                    <td><a href="<c:url value='${pageContext.request.contextPath}/users/deleteUser/${user.id}'/>">Delete User</a></td>
                 </tr>
             </c:forEach>
             </tbody>

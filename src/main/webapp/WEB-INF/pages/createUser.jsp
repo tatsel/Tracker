@@ -16,25 +16,28 @@
   <jsp:include page="header.jsp" />
   <div class="jumbotron">
     <p class="lead">Enter user data here:</p>
-    <form:form action="${pageContext.request.contextPath}/users/addUser" method="post" modelAttribute="user">
+    <form:form action="${pageContext.request.contextPath}/users/addUser" method="post" modelAttribute="userForm">
+        <div class="form-group">
+            <label for="firstName">Firstname:</label>
+            <form:input path="firstName" class="form-control" ng-model="firstname"/>
+        </div>
       <div class="form-group">
-        <label for="firstname">Firstname:</label>
-        <form:input path="firstname" class="form-control" ng-model="firstname"/>
+        <label for="lastName">Lastname:</label>
+        <form:input path="lastName" class="form-control" ng-model="lastname"/>
       </div>
       <div class="form-group">
-        <label for="lastname">Lastname:</label>
-        <form:input path="lastname" class="form-control" ng-model="lastname"/>
-      </div>
-      <div class="form-group">
-        <label for="login">Login:</label>
-        <%--<form:label path="login" class="form-control">
+        <label>Login:</label>
+        <label path="login" class="form-control">
           {{firstname}}_{{lastname}}
-        </form:label>--%>
-        <form:input path="login" class="form-control"/>
+        </label>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
         <form:input path="password" class="form-control"/>
+      </div>
+      <div class="form-group">
+          <label for="passwordVerify">Password Verification:</label>
+          <form:input path="passwordVerify" class="form-control"/>
       </div>
       <div class="form-group">
         <label for="position">Position:</label>
