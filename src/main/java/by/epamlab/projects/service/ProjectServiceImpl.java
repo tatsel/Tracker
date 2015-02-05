@@ -8,14 +8,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
+@Transactional
 public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private ProjectDao projectDao;
 
-    @Transactional
     @Override
     public List<Project> loadProjectList() {
-        return null;
+        return projectDao.getProjects();
+    }
+
+    @Override
+    public void addProject(Project project) {
+        projectDao.addProject(project);
+    }
+
+    @Override
+    public void deleteProject(Integer id) {
+        projectDao.deleteProject(id);
     }
 }

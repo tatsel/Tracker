@@ -21,4 +21,16 @@ public class ProjectDaoImpl implements ProjectDao {
                 .list();
         return projects;
     }
+
+    @Override
+    public void addProject(Project project) {
+        sessionFactory.getCurrentSession().save(project);
+    }
+
+    @Override
+    public void deleteProject(Integer id) {
+        sessionFactory.getCurrentSession()
+                .createQuery("delete from Project where id= :id")
+                .setString("id", Integer.toString(id)).executeUpdate();
+    }
 }

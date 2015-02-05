@@ -40,7 +40,7 @@
                     <td>${project.asd}</td>
                     <td>${project.aed}</td>
                     <td>${project.status.name}</td>
-                    <td><a href="<c:url value='${pageContext.request.contextPath}/projectss/deleteProject/${project.id}'/>">Delete Project</a></td>
+                    <td><a href="<c:url value='${pageContext.request.contextPath}/projects/deleteProject/${project.id}'/>">Delete Project</a></td>
                 </tr>
             </c:forEach>
             </tbody>

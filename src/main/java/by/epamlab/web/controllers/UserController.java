@@ -23,6 +23,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PositionService positionService;
+    @Autowired
+    private UserRoleService userRoleService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView usersPage() {
@@ -35,10 +39,7 @@ public class UserController {
 
     }
 
-    @Autowired
-    private PositionService positionService;
-    @Autowired
-    private UserRoleService userRoleService;
+
 
     @RequestMapping(value = "/users/createUser", method = RequestMethod.GET)
     public ModelAndView createUserPage() {

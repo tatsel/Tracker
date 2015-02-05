@@ -27,7 +27,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Bean
     public SessionFactory sessionFactory() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("by.epamlab.users.model")
+        builder.scanPackages("by.epamlab.*")
                 .addProperties(getHibernateProperties());
 
         return builder.buildSessionFactory();

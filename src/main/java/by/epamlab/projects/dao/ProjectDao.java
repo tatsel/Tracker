@@ -8,4 +8,7 @@ public interface ProjectDao {
 
     List<Project> getProjects();
 
+    void addProject(Project project);
+
+    void deleteProject(Integer id);
 }
