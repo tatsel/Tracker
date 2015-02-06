@@ -33,7 +33,7 @@
                     <td>${user.login}</td>
                     <td>${user.position.name}</td>
                     <td>${user.userRole.name}</td>
-                    <td><a href="<c:url value='${pageContext.request.contextPath}/users/deleteUser/${user.id}'/>">Delete User</a></td>
+                    <td><a href="<c:url value='${pageContext.request.contextPath}/admin/users/deleteUser/${user.id}'/>">Delete User</a></td>
                 </tr>
             </c:forEach>
             </tbody>

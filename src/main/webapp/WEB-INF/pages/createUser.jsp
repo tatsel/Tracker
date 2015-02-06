@@ -16,7 +16,7 @@
   <jsp:include page="header.jsp" />
   <div class="jumbotron">
     <p class="lead">Enter user data here:</p>
-    <form:form action="${pageContext.request.contextPath}/users/addUser" method="post" modelAttribute="userForm">
+    <form:form action="${pageContext.request.contextPath}/admin/users/addUser" method="post" modelAttribute="userForm">
         <div class="form-group">
             <label for="firstName">Firstname:</label>
             <form:input path="firstName" class="form-control" ng-model="firstname"/>

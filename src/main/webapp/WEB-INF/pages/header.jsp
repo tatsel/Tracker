@@ -10,12 +10,11 @@
     <div>
       <ul class="nav navbar-nav">
         <li><a >Dashboard</a></li>
-        <li><a href="${contextPath}/projects">Projects</a></li>
+        <li><a href="${contextPath}/home/projects">Projects</a></li>
         <li><a >Issues</a></li>
         <sec:authorize access="hasRole('SUPERADMIN')">
-          <li><a href="${contextPath}/users">Users</a></li>
-          <li><a href="${contextPath}/users/createUser">Create User</a></li>
-          <li><a >Create Project</a></li>
+          <li><a href="${contextPath}/admin/users">Users</a></li>
+          <li><a href="${contextPath}/admin/users/createUser">Create User</a></li>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
           <li><a >Create Issue</a></li>

@@ -33,4 +33,13 @@ public class ProjectDaoImpl implements ProjectDao {
                 .createQuery("delete from Project where id= :id")
                 .setString("id", Integer.toString(id)).executeUpdate();
     }
+
+    @Override
+    public Project getProjectById(Integer id) {
+        Project project = (Project)sessionFactory.getCurrentSession()
+                .createQuery("from Project where id =:id")
+                .setString("id", Integer.toString(id))
+                .uniqueResult();
+        return project;
+    }
 }

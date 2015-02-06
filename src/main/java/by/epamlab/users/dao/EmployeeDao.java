@@ -14,4 +14,6 @@ public interface EmployeeDao {
     void addUser(Employee user);
 
     void deleteUser(Integer id);
+
+    Employee findById(int employeeId);
 }

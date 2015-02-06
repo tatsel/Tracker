@@ -2,6 +2,7 @@ package by.epamlab.projects.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "project", catalog = "trackerdb")
@@ -15,6 +16,7 @@ public class Project {
     private Date asd;
     private Date aed;
     private Status status;
+    private Set<Member> members;
 
     public Project() {
     }
@@ -103,5 +105,14 @@ public class Project {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+    public Set<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Member> members) {
+        this.members = members;
     }
 }

@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private UserRoleService userRoleService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/users", method = RequestMethod.GET)
     public ModelAndView usersPage() {
 
         ModelAndView model = new ModelAndView();
@@ -41,7 +41,7 @@ public class UserController {
 
 
 
-    @RequestMapping(value = "/users/createUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/users/createUser", method = RequestMethod.GET)
     public ModelAndView createUserPage() {
 
         ModelAndView model = new ModelAndView();
@@ -54,13 +54,13 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/users/addUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/users/addUser", method = RequestMethod.POST)
     public ModelAndView addUser(@Valid UserForm userForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return createUserPage();
         }
-        ModelAndView model = new ModelAndView("redirect:/users/createUser");
+        ModelAndView model = new ModelAndView("redirect:/admin/users/createUser");
         Employee user = new Employee();
         String password = userForm.getPassword();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -79,10 +79,10 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/users/deleteUser/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/users/deleteUser/{id}", method = RequestMethod.GET)
     public ModelAndView deleteUser(@PathVariable Integer id) {
 
-        ModelAndView model = new ModelAndView("redirect:/users");
+        ModelAndView model = new ModelAndView("redirect:/admin/users");
         userService.deleteUser(id);
         System.out.println(id);
         return model;

@@ -22,7 +22,7 @@ public class ProjectController {
     @Autowired
     private StatusService statusService;
 
-    @RequestMapping(value = "/projects", method = RequestMethod.GET)
+    @RequestMapping(value = "/home/projects", method = RequestMethod.GET)
     public ModelAndView projectsPage() {
 
         ModelAndView model = new ModelAndView();
@@ -33,7 +33,7 @@ public class ProjectController {
 
     }
 
-    @RequestMapping(value = "/projects/createProject", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/projects/createProject", method = RequestMethod.GET)
     public ModelAndView createProjectPage() {
 
         ModelAndView model = new ModelAndView();
@@ -45,10 +45,10 @@ public class ProjectController {
 
     }
 
-    @RequestMapping(value = "/projects/addProject", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/projects/addProject", method = RequestMethod.POST)
     public ModelAndView addProject(@Validated ProjectForm projectForm, BindingResult bindingResult) {
 
-        ModelAndView model = new ModelAndView("redirect:/projects/createProject");
+        ModelAndView model = new ModelAndView("redirect:/admin/projects/createProject");
 
         if (bindingResult.hasErrors()) {
             return createProjectPage();
@@ -64,12 +64,30 @@ public class ProjectController {
 
     }
 
-    @RequestMapping(value = "/projects/deleteProject/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/projects/deleteProject/{id}", method = RequestMethod.GET)
     public ModelAndView deleteUser(@PathVariable Integer id) {
 
-        ModelAndView model = new ModelAndView("redirect:/projects");
+        ModelAndView model = new ModelAndView("redirect:/admin/projects");
         projectService.deleteProject(id);
-        System.out.println(id);
+        return model;
+
+    }
+
+    @RequestMapping(value = "/home/projects/projectdetails/{id}", method = RequestMethod.GET)
+    public ModelAndView projectDetailsId(@PathVariable Integer id) {
+
+        ModelAndView model = new ModelAndView("projectDetails");
+        Project project = projectService.getProjectById(id);
+        model.addObject("project", project);
+        model.addObject("members", project.getMembers());
+        return model;
+
+    }
+
+    @RequestMapping(value = "/home/projects/projectdetails", method = RequestMethod.GET)
+    public ModelAndView projectDetails() {
+
+        ModelAndView model = new ModelAndView("projectDetails");
         return model;
 
     }

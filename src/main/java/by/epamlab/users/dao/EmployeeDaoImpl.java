@@ -52,5 +52,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
         .setString("id", Integer.toString(id)).executeUpdate();
     }
 
+    @Override
+    public Employee findById(int employeeId) {
+        Employee employee = (Employee)sessionFactory.getCurrentSession()
+                .createQuery("from Employee where id = :id")
+                .setString("id", Integer.toString(employeeId))
+                .uniqueResult();
+        return employee;
+    }
+
 
 }

@@ -16,7 +16,7 @@
     <jsp:include page="header.jsp" />
     <div class="jumbotron">
         <p class="lead">Enter project data here:</p>
-        <form:form action="${pageContext.request.contextPath}/projects/addProject" method="post" modelAttribute="projectForm">
+        <form:form action="${pageContext.request.contextPath}/admin/projects/addProject" method="post" modelAttribute="projectForm">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <form:input path="name" class="form-control"/>

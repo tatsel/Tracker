@@ -10,4 +10,6 @@ public interface UserService {
     public void addUser(Employee user);
 
     void deleteUser(Integer id);
+
+    Employee getUserById(int employeeId);
 }
