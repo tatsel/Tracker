@@ -60,6 +60,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return createUserPage();
         }
+
         ModelAndView model = new ModelAndView("redirect:/admin/users/createUser");
         Employee user = new Employee();
         String password = userForm.getPassword();

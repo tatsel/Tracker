@@ -5,9 +5,6 @@ import javax.validation.constraints.NotNull;
 public class MemberForm {
 
     @NotNull
-    private int projectId;
-
-    @NotNull
     private int employeeId;
 
     @NotNull
@@ -18,14 +15,6 @@ public class MemberForm {
     private int roleId;*/
 
     public MemberForm() {
-    }
-
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
     }
 
     public int getEmployeeId() {

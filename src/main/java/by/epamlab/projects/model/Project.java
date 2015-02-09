@@ -21,7 +21,7 @@ public class Project {
     public Project() {
     }
 
-    public Project(Integer id, String name, String description, Date psd, Date ped, Date asd, Date aed, Status status) {
+    public Project(Integer id, String name, String description, Date psd, Date ped, Date asd, Date aed, Status status, Set<Member> members) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -30,6 +30,7 @@ public class Project {
         this.asd = asd;
         this.aed = aed;
         this.status = status;
+        this.members = members;
     }
 
     @Id
@@ -107,7 +108,10 @@ public class Project {
         this.status = status;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", orphanRemoval = true)
+    //@OnDelete(action= OnDeleteAction.CASCADE)
+    //@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.DELETE})
+    //@Cascade({ org.hibernate.annotations.CascadeType.DELETE })
     public Set<Member> getMembers() {
         return members;
     }

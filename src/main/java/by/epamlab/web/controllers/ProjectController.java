@@ -67,7 +67,7 @@ public class ProjectController {
     @RequestMapping(value = "/admin/projects/deleteProject/{id}", method = RequestMethod.GET)
     public ModelAndView deleteUser(@PathVariable Integer id) {
 
-        ModelAndView model = new ModelAndView("redirect:/admin/projects");
+        ModelAndView model = new ModelAndView("redirect:/home/projects");
         projectService.deleteProject(id);
         return model;
 
@@ -79,7 +79,6 @@ public class ProjectController {
         ModelAndView model = new ModelAndView("projectDetails");
         Project project = projectService.getProjectById(id);
         model.addObject("project", project);
-        model.addObject("members", project.getMembers());
         return model;
 
     }

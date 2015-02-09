@@ -15,7 +15,7 @@
     <jsp:include page="header.jsp"></jsp:include>
     <div class="jumbotron">
         <sec:authorize access="hasRole('SUPERADMIN')">
-            <a href="${pageContext.request.contextPath}/admin/projects/addMembers/${project.id}">Add Members</a>
+            <a href="${pageContext.request.contextPath}/admin/projects/createMember/${project.id}">Add Members</a>
         </sec:authorize>
         <p class="lead">Projects:</p>
         <table class="table table-striped">
@@ -41,9 +41,12 @@
                     <td>${project.aed}</td>
                     <td>${project.status.name}</td>
                     <td>
-                        <c:forEach items="${membersList}" var="member">
-                            <p>${member.employee.login}</p>
-                            <p>${member.role.name}</p>
+                        <c:forEach items="${project.members}" var="member">
+                            ${member.employee.login}<br/>
+                            ${member.role.name}<br/>
+                            <sec:authorize access="hasRole('SUPERADMIN')">
+                                <a href="${pageContext.request.contextPath}/admin/projects/deleteMember/${project.id}/${member.id}">Delete</a><br/>
+                            </sec:authorize>
                         </c:forEach>
                     </td>
                 </tr>
