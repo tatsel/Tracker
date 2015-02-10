@@ -1,40 +1,36 @@
-package by.epamlab.projects.model;
+package by.epamlab.issues.model;
 
-import by.epamlab.issues.model.Task;
+import by.epamlab.projects.model.Project;
+import by.epamlab.projects.model.Status;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Set;
 
 @Entity
-@Table(name = "project", catalog = "trackerdb1")
-public class Project {
+@Table(name = "task", catalog = "trackerdb1")
+public class Task {
 
     private Integer id;
-    private String name;
+    private Project project;
     private String description;
     private Date psd;
-    private Date ped;
     private Date asd;
+    private Date ped;
     private Date aed;
     private Status status;
-    private Set<Member> members;
-    private Set<Task> tasks;
 
-    public Project() {
+    public Task() {
     }
 
-    public Project(Integer id, String name, String description, Date psd, Date ped, Date asd, Date aed, Status status, Set<Member> members, Set<Task> tasks) {
+    public Task(Integer id, Project project, String description, Date psd, Date asd, Date ped, Date aed, Status status) {
         this.id = id;
-        this.name = name;
+        this.project = project;
         this.description = description;
         this.psd = psd;
-        this.ped = ped;
         this.asd = asd;
+        this.ped = ped;
         this.aed = aed;
         this.status = status;
-        this.members = members;
-        this.tasks = tasks;
     }
 
     @Id
@@ -48,13 +44,14 @@ public class Project {
         this.id = id;
     }
 
-    @Column(name = "name", nullable = false, unique = true)
-    public String getName() {
-        return name;
+    @ManyToOne
+    @JoinColumn(name = "PROJECTID")
+    public Project getProject() {
+        return project;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     @Column(name = "description")
@@ -102,7 +99,7 @@ public class Project {
         this.aed = aed;
     }
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "STATUSID")
     public Status getStatus() {
         return status;
@@ -110,23 +107,5 @@ public class Project {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", orphanRemoval = true)
-    public Set<Member> getMembers() {
-        return members;
-    }
-
-    public void setMembers(Set<Member> members) {
-        this.members = members;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", orphanRemoval = true)
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
     }
 }

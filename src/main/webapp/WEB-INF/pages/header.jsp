@@ -11,14 +11,12 @@
       <ul class="nav navbar-nav">
         <li><a >Dashboard</a></li>
         <li><a href="${contextPath}/home/projects">Projects</a></li>
-        <li><a >Issues</a></li>
+        <li><a href="${contextPath}/home/issues">Issues</a></li>
         <sec:authorize access="hasRole('SUPERADMIN')">
           <li><a href="${contextPath}/admin/users">Users</a></li>
           <li><a href="${contextPath}/admin/users/createUser">Create User</a></li>
         </sec:authorize>
-        <sec:authorize access="hasRole('ADMIN')">
-          <li><a >Create Issue</a></li>
-        </sec:authorize>
+        <li><a href="${contextPath}/home/tasks/createIssue">Create Issue</a></li>
         <li>Hello, <b>${pageContext.request.userPrincipal.name}</b>!</li>
         <li>
           <a class="btn btn-lg btn-success" role="button" href="${contextPath}/logout">

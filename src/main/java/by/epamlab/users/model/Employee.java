@@ -3,7 +3,7 @@ package by.epamlab.users.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employee", catalog = "trackerdb")
+@Table(name = "employee", catalog = "trackerdb1")
 public class Employee {
 
     private Integer id;

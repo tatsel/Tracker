@@ -47,7 +47,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/trackerdb");
+        ds.setUrl("jdbc:mysql://localhost:3306/trackerdb1");
         ds.setUsername("root");
         ds.setPassword("1234");
         return ds;

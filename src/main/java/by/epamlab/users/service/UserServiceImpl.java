@@ -54,4 +54,9 @@ public class UserServiceImpl implements UserService {
         }
         return employees;
     }
+
+    @Override
+    public Employee findUserByLogin(String name) {
+        return employeeDao.findByLogin(name);
+    }
 }

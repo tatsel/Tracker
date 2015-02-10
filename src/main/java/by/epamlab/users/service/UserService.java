@@ -15,4 +15,6 @@ public interface UserService {
     Employee getUserById(int employeeId);
 
     List<Employee> loadUsersNotMembers(Project projectById);
+
+    Employee findUserByLogin(String name);
 }

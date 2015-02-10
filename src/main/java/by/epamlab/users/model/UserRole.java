@@ -3,7 +3,7 @@ package by.epamlab.users.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "siterole", catalog = "trackerdb")
+@Table(name = "siterole", catalog = "trackerdb1")
 public class UserRole {
 
     private Integer id;
