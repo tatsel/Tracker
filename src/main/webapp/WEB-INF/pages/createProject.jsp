@@ -5,15 +5,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
-<head>
-    <title>${title}</title>
-    <link href="<c:url value="/resources/css/vendor/bootstrap.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/vendor/jumbotron-narrow.css" />" rel="stylesheet">
-</head>
+<jsp:include page="includes/head.jsp"></jsp:include>
 <body>
 
-<div class="container">
-    <jsp:include page="header.jsp" />
+<div class="container-fluid">
+    <jsp:include page="includes/navbar.jsp" />
     <div class="jumbotron">
         <p class="lead">Enter project data here:</p>
         <form:form action="${pageContext.request.contextPath}/admin/projects/addProject" method="post" modelAttribute="projectForm">
@@ -33,21 +29,12 @@
                 <label for="ped">PED:</label>
                 <form:input path="ped" class="form-control"/>
             </div>
-            <%--<div class="form-group">
-                <label for="status">Status:</label>
-                <form:select path="status" class="form-control">
-                    <c:forEach items="${statusList}" var="status">
-                        <form:option value="${status.name}" label="${status.name}" class="form-control"/>
-                    </c:forEach>
-                </form:select>
-            </div>--%>
 
             <button name="submit" type="submit" class="btn btn-success">Add Project</button>
 
         </form:form>
     </div>
+<jsp:include page="includes/foot.jsp"></jsp:include>
 
-    <script src="${pageContext.request.contextPath}/resources/js/vendor/angular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/app.js"></script>
 </body>
 </html>

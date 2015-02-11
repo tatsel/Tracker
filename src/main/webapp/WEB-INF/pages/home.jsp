@@ -5,36 +5,42 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <html>
-<head>
-  <title>
-    Simple Tracker
-  </title>
-
-  <link href="<c:url value="/resources/css/vendor/bootstrap.css" />" rel="stylesheet">
-  <link href="<c:url value="/resources/css/vendor/jumbotron-narrow.css" />" rel="stylesheet">
-</head>
-
+<jsp:include page="includes/head.jsp"></jsp:include>
 <body>
-<div class="container">
-  <jsp:include page="header.jsp"></jsp:include>
-  <div class="jumbotron">
-    <h1>${message}</h1>
-    <p class="lead"> Now, you can logout, lol</p>
-   <%-- <div id="head">
-      Hello, <b>${pageContext.request.userPrincipal.name}; </b>
+<div class="container-fluid">
+  <jsp:include page="includes/navbar.jsp"></jsp:include>
+  <div class="row">
+      <div class="col-md-8">
+          <p class="lead">Activities:</p>
+
+          <c:forEach items="${activities}" var="activity">
+              <p>
+                      ${activity.member.employee.login} ${activity.comment} ${activity.assignment.task.description} ${activity.date}
+              </p>
+          </c:forEach>
       </div>
-    <sec:authorize access="hasRole('SUPERADMIN')">
-      <div>
-        This content will only be visible to users who have the "SUPERADMIN" authority.
+      <div class="col-md-4">
+          <p class="lead">Assigned to me:</p>
+
+          <c:forEach items="${assignments}" var="assignment">
+              <c:choose>
+                  <c:when test="${assignment.member.employee.login eq pageContext.request.userPrincipal.name}">
+                      <p>
+                           ${assignment.task.description}
+                      </p>
+                  </c:when>
+                  <c:otherwise>
+
+                  </c:otherwise>
+              </c:choose>
+
+          </c:forEach>
       </div>
-    </sec:authorize>
-    <a class="btn btn-lg btn-success" role="button" href="${pageContext.request.contextPath}/logout">
-      Log Out
-    </a>--%>
+
+
   </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.11.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources//js/vendor/bootstrap.js"></script>
+<jsp:include page="includes/foot.jsp"></jsp:include>
 </body>
 </html>

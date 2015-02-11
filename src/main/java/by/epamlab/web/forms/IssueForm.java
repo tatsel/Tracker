@@ -8,6 +8,8 @@ public class IssueForm {
     @NotNull
     private String description;
     @NotNull
+    private String summary;
+    @NotNull
     private String psd;
     @NotNull
     private String ped;
@@ -29,6 +31,14 @@ public class IssueForm {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getPsd() {

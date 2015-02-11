@@ -13,6 +13,7 @@ public class Task {
     private Integer id;
     private Project project;
     private String description;
+    private String summary;
     private Date psd;
     private Date asd;
     private Date ped;
@@ -22,10 +23,11 @@ public class Task {
     public Task() {
     }
 
-    public Task(Integer id, Project project, String description, Date psd, Date asd, Date ped, Date aed, Status status) {
+    public Task(Integer id, Project project, String description, String summary, Date psd, Date asd, Date ped, Date aed, Status status) {
         this.id = id;
         this.project = project;
         this.description = description;
+        this.summary = summary;
         this.psd = psd;
         this.asd = asd;
         this.ped = ped;
@@ -61,6 +63,15 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(name = "summary")
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     @Column(name = "psd")

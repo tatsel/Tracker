@@ -5,15 +5,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
-<head>
-    <title>Create Issue</title>
-    <link href="<c:url value="/resources/css/vendor/bootstrap.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/vendor/jumbotron-narrow.css" />" rel="stylesheet">
-</head>
+<jsp:include page="includes/head.jsp"></jsp:include>
 <body>
 
-<div class="container">
-    <jsp:include page="header.jsp" />
+<div class="container-fluid">
+    <jsp:include page="includes/navbar.jsp" />
     <div class="jumbotron">
         <p class="lead">Enter issue data here:</p>
         <c:if test="${noProjects}">
@@ -28,6 +24,10 @@
                             <form:option value="${project.id}" label="${project.name}" class="form-control"/>
                         </c:forEach>
                     </form:select>
+                </div>
+                <div class="form-group">
+                    <label for="summary">Summary:</label>
+                    <form:input path="summary" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label>Assignee:</label>
@@ -60,8 +60,6 @@
         </c:if>
 
     </div>
-
-    <script src="${pageContext.request.contextPath}/resources/js/vendor/angular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/app.js"></script>
+<jsp:include page="includes/foot.jsp"></jsp:include>
 </body>
 </html>

@@ -48,10 +48,10 @@ public class IssueController {
 
     @RequestMapping(value = "/home/issues", method = RequestMethod.GET)
     public ModelAndView issuesPage() {
-
         ModelAndView model = new ModelAndView();
         model.addObject("assignmentsList", assignmentService.loadAssignmentsList());
         model.addObject("taskList", taskService.loadTaskList());
+        model.addObject("title", "Issues - Simple Tracker");
         model.setViewName("issues");
         return model;
 
@@ -59,19 +59,16 @@ public class IssueController {
 
     @RequestMapping(value = "/home/issues/createIssue", method = RequestMethod.GET)
     public ModelAndView createIssuePage() {
-
         ModelAndView model = new ModelAndView();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername();
         List<Project> leadOrManagerProjects = memberService.loadProjectMemberList(userService.findUserByLogin(name));
         model.addObject("noProjects", leadOrManagerProjects.isEmpty());
-        System.out.print(leadOrManagerProjects.isEmpty());
         model.addObject("projects", leadOrManagerProjects);
-        //model.addObject("employees", userService.loadUserList());
         model.addObject("issueForm", new IssueForm());
+        model.addObject("title", "Create Issue - Simple Tracker");
         model.setViewName("createIssue");
         return model;
-
     }
 
     @RequestMapping(value = "/home/issues/addIssue", method = RequestMethod.POST)
@@ -82,17 +79,18 @@ public class IssueController {
         if (bindingResult.hasErrors()) {
             return createIssuePage();
         }
+
         Task task = new Task();
         Assignment assignment = new Assignment();
         Activity activity = new Activity();
         task.setProject(projectService.getProjectById(issueForm.getProject()));
         task.setDescription(issueForm.getDescription());
+        task.setSummary(issueForm.getSummary());
         task.setPsd(java.sql.Date.valueOf(issueForm.getPsd()));
         task.setPed(java.sql.Date.valueOf(issueForm.getPed()));
         task.setStatus(statusService.getStatusByName("Not started"));
         taskService.addTask(task);
-        task = taskService.getLastTask();
-
+       // task = taskService.getLastTask();
 
         assignment.setTask(task);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -106,8 +104,7 @@ public class IssueController {
         }
         assignment.setMember(member);
         assignmentService.addAssignment(assignment);
-        assignment = assignmentService.getLastAssignment();
-
+      //  assignment = assignmentService.getLastAssignment();
 
         activity.setDate(new Date(new java.util.Date().getTime()));
         activity.setMember(member);

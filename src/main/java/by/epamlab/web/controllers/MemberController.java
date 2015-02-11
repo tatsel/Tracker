@@ -36,6 +36,7 @@ public class MemberController {
         model.addObject("roles", roleService.loadRoleList());
         model.addObject("employees", userService.loadUsersNotMembers(projectService.getProjectById(id)));
         model.addObject("memberForm", new MemberForm());
+        model.addObject("title", "Create Member - Simple Tracker");
         model.setViewName("createMember");
         return model;
 

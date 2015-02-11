@@ -34,6 +34,7 @@ public class UserController {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Users list");
         model.addObject("usersList", userService.loadUserList());
+        model.addObject("title", "Users - Simple Tracker");
         model.setViewName("users");
         return model;
 
@@ -49,6 +50,7 @@ public class UserController {
         model.addObject("positionsList", positionService.loadPositions());
         model.addObject("userRoleList", userRoleService.loadUserRoles());
         model.addObject("userForm", new UserForm());
+        model.addObject("title", "Create User - Simple Tracker");
         model.setViewName("createUser");
         return model;
 
@@ -74,7 +76,6 @@ public class UserController {
         user.setPassword(hashedPassword);
         user.setPosition(positionService.getPositionByName(userForm.getPosition()));
         user.setUserRole(userRoleService.getRoleByName(userForm.getUserRole()));
-        //System.out.println(user.getUserRole());
         userService.addUser(user);
         return model;
 

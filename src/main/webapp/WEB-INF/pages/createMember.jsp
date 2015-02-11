@@ -5,15 +5,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
-<head>
-    <title>Add Member</title>
-    <link href="<c:url value="/resources/css/vendor/bootstrap.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/vendor/jumbotron-narrow.css" />" rel="stylesheet">
-</head>
-<body ng-app="myapp">
+<jsp:include page="includes/head.jsp"></jsp:include>
+<body>
 
-<div class="container" ng-controller="addUserController">
-    <jsp:include page="header.jsp" />
+<div class="container-fluid">
+    <jsp:include page="includes/navbar.jsp" />
     <div class="jumbotron">
         <p class="lead">Add member for project ${project.name}:</p>
         <form:form action="${pageContext.request.contextPath}/admin/projects/addMember/${project.id}" method="post" modelAttribute="memberForm">
@@ -39,8 +35,6 @@
 
         </form:form>
     </div>
-
-    <script src="${pageContext.request.contextPath}/resources/js/vendor/angular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/app.js"></script>
+<jsp:include page="includes/foot.jsp"></jsp:include>
 </body>
 </html>

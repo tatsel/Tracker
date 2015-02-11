@@ -26,7 +26,7 @@ public class ProjectController {
     public ModelAndView projectsPage() {
 
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Projects list");
+        model.addObject("title", "Projects - Simple Tracker");
         model.addObject("projectsList", projectService.loadProjectList());
         model.setViewName("projects");
         return model;
@@ -37,7 +37,7 @@ public class ProjectController {
     public ModelAndView createProjectPage() {
 
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Create project");
+        model.addObject("title", "Create Project - Simple Tracker");
         model.addObject("statusList", statusService.loadStatusList());
         model.addObject("projectForm", new ProjectForm());
         model.setViewName("createProject");
@@ -87,6 +87,7 @@ public class ProjectController {
     public ModelAndView projectDetails() {
 
         ModelAndView model = new ModelAndView("projectDetails");
+        model.addObject("title", "Project Details - Simple Tracker");
         return model;
 
     }

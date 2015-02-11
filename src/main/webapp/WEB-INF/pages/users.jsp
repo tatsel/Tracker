@@ -4,15 +4,11 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <html>
-<head>
-    <title>${title}</title>
-    <link href="<c:url value="/resources/css/vendor/bootstrap.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/vendor/jumbotron-narrow.css" />" rel="stylesheet">
-</head>
+<jsp:include page="includes/head.jsp"></jsp:include>
 <body>
 
-<div class="container">
-    <jsp:include page="header.jsp"></jsp:include>
+<div class="container-fluid">
+    <jsp:include page="includes/navbar.jsp"></jsp:include>
     <div class="jumbotron">
         <p class="lead">Employees:</p>
         <table class="table table-striped">
@@ -39,6 +35,6 @@
             </tbody>
         </table>
     </div>
-
+<jsp:include page="includes/foot.jsp"></jsp:include>
 </body>
 </html>
