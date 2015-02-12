@@ -17,11 +17,12 @@
             <thead>
             <tr>
                 <th>Project Name</th>
-                <th>Task Description</th>
+                <th>Task Summary</th>
                 <th>PSD</th>
                 <th>PED</th>
                 <th>ASD</th>
                 <th>AED</th>
+                <th>Task Description</th>
                 <th>Status</th>
                 <th>Assignee</th>
             </tr>
@@ -30,11 +31,12 @@
             <c:forEach items="${assignmentsList}" var="assignment">
                 <tr>
                     <td>${assignment.task.project.name}</td>
-                    <td>${assignment.task.description}</td>
+                    <td><a href="<c:url value='${pageContext.request.contextPath}/home/issues/issuedetails/${assignment.id}'/>">${assignment.task.summary}</a></td>
                     <td>${assignment.task.psd}</td>
                     <td>${assignment.task.ped}</td>
                     <td>${assignment.task.asd}</td>
                     <td>${assignment.task.aed}</td>
+                    <td>${assignment.task.description}</td>
                     <td>${assignment.task.status.name}</td>
                     <td>${assignment.member.employee.login}</td>
                 </tr>

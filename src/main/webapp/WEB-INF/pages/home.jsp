@@ -15,26 +15,36 @@
 
           <c:forEach items="${activities}" var="activity">
               <p>
-                      ${activity.member.employee.login} ${activity.comment} ${activity.assignment.task.description} ${activity.date}
+                  ${activity.member.employee.login} ${activity.comment} (Task: <a href="<c:url value='${pageContext.request.contextPath}/home/issues/issuedetails/${activity.assignment.id}'/>">${activity.assignment.task.summary}</a> Assignee: ${activity.assignment.member.employee.login}) on ${activity.date}
               </p>
           </c:forEach>
       </div>
       <div class="col-md-4">
           <p class="lead">Assigned to me:</p>
 
-          <c:forEach items="${assignments}" var="assignment">
-              <c:choose>
-                  <c:when test="${assignment.member.employee.login eq pageContext.request.userPrincipal.name}">
-                      <p>
-                           ${assignment.task.description}
-                      </p>
-                  </c:when>
-                  <c:otherwise>
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>Project</th>
+                      <th>Task Summary</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <c:forEach items="${employee.members}" var="member">
+                      <c:forEach items="${member.assignments}" var="assignment">
+                          <tr>
+                              <td>
+                                  <a href="<c:url value='${pageContext.request.contextPath}/home/projects/projectdetails/${assignment.task.project.id}'/>">${assignment.task.project.name}</a>
+                              </td>
+                              <td>
+                                  <a href="<c:url value='${pageContext.request.contextPath}/home/issues/issuedetails/${assignment.id}'/>">${assignment.task.summary}</a>
+                              </td>
+                          </tr>
+                      </c:forEach>
+                  </c:forEach>
+              </tbody>
+          </table>
 
-                  </c:otherwise>
-              </c:choose>
-
-          </c:forEach>
       </div>
 
 

@@ -8,4 +8,6 @@ public interface StatusService {
     public List<Status> loadStatusList();
 
     Status getStatusByName(String status);
+
+    Status getStatusById(Integer statusId);
 }

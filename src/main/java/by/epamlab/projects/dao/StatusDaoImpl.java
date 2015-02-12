@@ -30,4 +30,13 @@ public class StatusDaoImpl implements StatusDao{
                 .uniqueResult();
         return status;
     }
+
+    @Override
+    public Status getStatusById(Integer statusId) {
+        Status status = (Status)sessionFactory.getCurrentSession()
+                .createQuery("from Status where id =:id")
+                .setString("id", String.valueOf(statusId))
+                .uniqueResult();
+        return status;
+    }
 }

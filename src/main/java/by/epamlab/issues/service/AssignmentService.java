@@ -10,4 +10,6 @@ public interface AssignmentService {
     void addAssignment(Assignment assignment);
 
     Assignment getLastAssignment();
+
+    Assignment getAssignmentById(Integer id);
 }

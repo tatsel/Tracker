@@ -1,6 +1,9 @@
 package by.epamlab.web.controllers;
 
+import by.epamlab.issues.model.Task;
+import by.epamlab.issues.service.TaskService;
 import by.epamlab.projects.model.Project;
+import by.epamlab.projects.model.Status;
 import by.epamlab.projects.service.ProjectService;
 import by.epamlab.projects.service.StatusService;
 import by.epamlab.web.forms.ProjectForm;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Set;
+
 @Controller
 @RequestMapping
 public class ProjectController {
@@ -21,6 +26,8 @@ public class ProjectController {
     private ProjectService projectService;
     @Autowired
     private StatusService statusService;
+    @Autowired
+    private TaskService taskService;
 
     @RequestMapping(value = "/home/projects", method = RequestMethod.GET)
     public ModelAndView projectsPage() {
@@ -38,7 +45,6 @@ public class ProjectController {
 
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Create Project - Simple Tracker");
-        model.addObject("statusList", statusService.loadStatusList());
         model.addObject("projectForm", new ProjectForm());
         model.setViewName("createProject");
         return model;
@@ -65,10 +71,27 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/admin/projects/deleteProject/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteUser(@PathVariable Integer id) {
+    public ModelAndView deleteProject(@PathVariable Integer id) {
 
         ModelAndView model = new ModelAndView("redirect:/home/projects");
         projectService.deleteProject(id);
+        return model;
+
+    }
+
+    @RequestMapping(value = "/admin/projects/changeStatus/{id}/{statusId}", method = RequestMethod.GET)
+    public ModelAndView suspendProject(@PathVariable Integer id, @PathVariable Integer statusId) {
+
+        ModelAndView model = new ModelAndView("redirect:/home/projects/projectdetails/"+id);
+        Project project = projectService.getProjectById(id);
+        Status status = statusService.getStatusById(statusId);
+        project.setStatus(status);
+        Set<Task> tasks = project.getTasks();
+        for (Task task: tasks) {
+            task.setStatus(status);
+            taskService.addTask(task);
+        }
+        projectService.addProject(project);
         return model;
 
     }

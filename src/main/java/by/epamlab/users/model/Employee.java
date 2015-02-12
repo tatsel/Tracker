@@ -1,6 +1,9 @@
 package by.epamlab.users.model;
 
+import by.epamlab.projects.model.Member;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "employee", catalog = "trackerdb1")
@@ -14,10 +17,11 @@ public class Employee {
     private Position position;
     private UserRole userRole;
     private boolean enabled;
+    private Set<Member> members;
 
     public Employee() {}
 
-    public Employee(String firstname, String lastname, String login, String password, Position position, UserRole userRole) {
+    public Employee(String firstname, String lastname, String login, String password, Position position, UserRole userRole, Set<Member> members) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.login = login;
@@ -25,6 +29,7 @@ public class Employee {
         this.position = position;
         this.userRole = userRole;
         this.enabled = true;
+        this.members = members;
 
     }
 
@@ -103,7 +108,12 @@ public class Employee {
         return enabled;
     }
 
-    public String toString() {
-        return id+";"+firstname+";"+lastname+";"+userRole+";"+position;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", orphanRemoval = true)
+    public Set<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<Member> members) {
+        this.members = members;
     }
 }

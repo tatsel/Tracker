@@ -24,7 +24,7 @@ public class ProjectDaoImpl implements ProjectDao {
 
     @Override
     public void addProject(Project project) {
-        sessionFactory.getCurrentSession().save(project);
+        sessionFactory.getCurrentSession().saveOrUpdate(project);
     }
 
     @Override
@@ -42,4 +42,5 @@ public class ProjectDaoImpl implements ProjectDao {
                 .uniqueResult();
         return project;
     }
+
 }

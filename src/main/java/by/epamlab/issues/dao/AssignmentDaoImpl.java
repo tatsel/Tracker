@@ -33,4 +33,13 @@ public class AssignmentDaoImpl implements AssignmentDao {
                 .uniqueResult();
         return assignment;
     }
+
+    @Override
+    public Assignment getAssignmentById(Integer id) {
+        Assignment assignment = (Assignment) sessionFactory.getCurrentSession()
+                .createQuery("from Assignment where id = :id")
+                .setString("id", Integer.toString(id))
+                .uniqueResult();
+        return assignment;
+    }
 }

@@ -27,4 +27,9 @@ public class AssignmentServiceImpl implements AssignmentService {
     public Assignment getLastAssignment() {
         return assignmentDao.getLastAssignment();
     }
+
+    @Override
+    public Assignment getAssignmentById(Integer id) {
+        return assignmentDao.getAssignmentById(id);
+    }
 }

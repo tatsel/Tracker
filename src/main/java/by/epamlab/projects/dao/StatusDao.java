@@ -8,4 +8,6 @@ public interface StatusDao {
     List<Status> getStatuses();
 
     Status getStatus(String status);
+
+    Status getStatusById(Integer statusId);
 }

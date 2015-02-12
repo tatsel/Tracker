@@ -11,35 +11,28 @@
     <jsp:include page="includes/navbar.jsp"></jsp:include>
     <div class="well">
         <sec:authorize access="hasRole('SUPERADMIN')">
-            <a href="${pageContext.request.contextPath}/admin/projects/createProject">Create Project</a>
+            <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin/projects/createProject">Create New Project</a> <br><br>
         </sec:authorize>
         <p class="lead">Projects:</p>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Project Name</th>
                 <th>Description</th>
-                <th>PSD</th>
-                <th>PED</th>
-                <th>ASD</th>
-                <th>AED</th>
                 <th>Status</th>
+                <sec:authorize access="hasRole('SUPERADMIN')">
+                    <th>Delete Project</th>
+                </sec:authorize>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${projectsList}" var="project">
                 <tr>
-                    <td>${project.id}</td>
                     <td><a href="<c:url value='${pageContext.request.contextPath}/home/projects/projectdetails/${project.id}'/>">${project.name}</a></td>
                     <td>${project.description}</td>
-                    <td>${project.psd}</td>
-                    <td>${project.ped}</td>
-                    <td>${project.asd}</td>
-                    <td>${project.aed}</td>
                     <td>${project.status.name}</td>
                     <sec:authorize access="hasRole('SUPERADMIN')">
-                        <td><a href="<c:url value='${pageContext.request.contextPath}/admin/projects/deleteProject/${project.id}'/>">Delete Project</a></td>
+                        <td><a href="<c:url value='${pageContext.request.contextPath}/admin/projects/deleteProject/${project.id}'/>"><button class="btn btn-danger btn-xs">Delete</button></a></td>
                     </sec:authorize>
                 </tr>
             </c:forEach>

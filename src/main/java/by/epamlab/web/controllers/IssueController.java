@@ -2,6 +2,7 @@ package by.epamlab.web.controllers;
 
 import by.epamlab.issues.model.Activity;
 import by.epamlab.issues.model.Assignment;
+import by.epamlab.issues.model.Constants;
 import by.epamlab.issues.model.Task;
 import by.epamlab.issues.service.ActivityService;
 import by.epamlab.issues.service.AssignmentService;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -83,6 +85,7 @@ public class IssueController {
         Task task = new Task();
         Assignment assignment = new Assignment();
         Activity activity = new Activity();
+
         task.setProject(projectService.getProjectById(issueForm.getProject()));
         task.setDescription(issueForm.getDescription());
         task.setSummary(issueForm.getSummary());
@@ -90,12 +93,11 @@ public class IssueController {
         task.setPed(java.sql.Date.valueOf(issueForm.getPed()));
         task.setStatus(statusService.getStatusByName("Not started"));
         taskService.addTask(task);
-       // task = taskService.getLastTask();
 
         assignment.setTask(task);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername();
-        Set<Member> members = projectService.getProjectById(issueForm.getProject()).getMembers();
+        Set<Member> members = task.getProject().getMembers();
         Member member = new Member();
         for (Member projmember: members) {
             if (projmember.getEmployee().getId() == userService.findUserByLogin(name).getId()) {
@@ -104,14 +106,32 @@ public class IssueController {
         }
         assignment.setMember(member);
         assignmentService.addAssignment(assignment);
-      //  assignment = assignmentService.getLastAssignment();
 
         activity.setDate(new Date(new java.util.Date().getTime()));
         activity.setMember(member);
         activity.setAssignment(assignment);
-        activity.setComment("blabla");
+        activity.setComment(Constants.ACTIVITY_ADD_TASK);
         activityService.addActivity(activity);
 
+        return model;
+
+    }
+
+    @RequestMapping(value = "/home/issues/issuedetails/{id}", method = RequestMethod.GET)
+    public ModelAndView issueDetailsId(@PathVariable Integer id) {
+
+        ModelAndView model = new ModelAndView("issueDetails");
+        Assignment assignment = assignmentService.getAssignmentById(id);
+        model.addObject("assignment", assignment);
+        return model;
+
+    }
+
+    @RequestMapping(value = "/home/issues/issuedetails", method = RequestMethod.GET)
+    public ModelAndView issueDetails() {
+
+        ModelAndView model = new ModelAndView("issueDetails");
+        model.addObject("title", "Issue Details - Simple Tracker");
         return model;
 
     }

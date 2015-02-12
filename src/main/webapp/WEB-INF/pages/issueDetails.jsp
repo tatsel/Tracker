@@ -15,7 +15,7 @@
         <button class="btn btn-default">Suspend</button>
         <button class="btn btn-default">Complete</button></br></br>
         <label>Status:</label>
-        <label>${status}</label></br></br>
+        <label>${assignment.task.status.name}</label></br></br>
         <label>Assign to:</label>
         <select>
             <c:forEach items="${members}" var="member">
@@ -25,14 +25,16 @@
         <button class="btn btn-default">Assign</button></br></br>
 
         <label>Assignee:</label>
-        <label>${assignee}</label></br></br>
+        <label>${assignment.member.employee.login}</label></br></br>
 
         <label>Activity:</label></br>
         <c:forEach items="${activities}" var="activity">
-            <option>${activity.comment}</option>
+            ${activity.comment}</br></br>
         </c:forEach>
+        </br></br>
 
-
+        <label>Project:</label>
+        <a href="<c:url value='${pageContext.request.contextPath}/home/projects/projectdetails/${assignment.task.project.id}'/>">${assignment.task.project.name}</a></br></br>
 
 
     </div>

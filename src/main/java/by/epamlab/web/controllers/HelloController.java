@@ -2,7 +2,11 @@ package by.epamlab.web.controllers;
 
 import by.epamlab.issues.service.ActivityService;
 import by.epamlab.issues.service.AssignmentService;
+import by.epamlab.users.model.Employee;
+import by.epamlab.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class HelloController {
     @Autowired
     ActivityService activityService;
+    @Autowired
+    UserService userService;
     @Autowired
     AssignmentService assignmentService;
 
@@ -27,9 +33,12 @@ public class HelloController {
     @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
     public ModelAndView homePage() {
         ModelAndView model = new ModelAndView();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = user.getUsername();
+        Employee employee = userService.findUserByLogin(name);
         model.addObject("title", "Dashboard - Simple Tracker");
         model.addObject("activities", activityService.loadActivities());
-        model.addObject("assignments", assignmentService.loadAssignmentsList());
+        model.addObject("employee", employee);
         model.setViewName("home");
         return model;
     }

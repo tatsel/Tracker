@@ -13,4 +13,5 @@ public interface ProjectDao {
     void deleteProject(Integer id);
 
     Project getProjectById(Integer id);
+
 }

@@ -65,7 +65,7 @@
                         <a href="${contextPath}/admin/users">All Users</a>
                     </li>
                     <li>
-                        <a href="${contextPath}/admin/users/createUsers">Create User</a>
+                        <a href="${contextPath}/admin/users/createUser">Create User</a>
                     </li>
                 </ul>
             </li>
