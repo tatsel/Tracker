@@ -51,8 +51,6 @@
               </ul>
           </li>
 
-          <li><a href="${contextPath}/home/search">Search</a></li>
-
         <sec:authorize access="hasRole('SUPERADMIN')">
             </li>
             <li class="dropdown">

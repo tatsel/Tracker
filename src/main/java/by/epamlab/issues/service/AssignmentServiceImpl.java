@@ -23,10 +23,10 @@ public class AssignmentServiceImpl implements AssignmentService {
         assignmentDao.addAssignment(assignment);
     }
 
-    @Override
+   /* @Override
     public Assignment getLastAssignment() {
         return assignmentDao.getLastAssignment();
-    }
+    }*/
 
     @Override
     public Assignment getAssignmentById(Integer id) {

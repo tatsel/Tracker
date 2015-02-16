@@ -1,13 +1,15 @@
 package by.epamlab.web.controllers;
 
-import by.epamlab.issues.model.Task;
-import by.epamlab.issues.service.TaskService;
 import by.epamlab.projects.model.Project;
 import by.epamlab.projects.model.Status;
 import by.epamlab.projects.service.ProjectService;
 import by.epamlab.projects.service.StatusService;
+import by.epamlab.users.model.Employee;
+import by.epamlab.users.service.UserService;
 import by.epamlab.web.forms.ProjectForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Set;
+import java.sql.Date;
 
 @Controller
 @RequestMapping
@@ -27,7 +29,7 @@ public class ProjectController {
     @Autowired
     private StatusService statusService;
     @Autowired
-    private TaskService taskService;
+    private UserService userService;
 
     @RequestMapping(value = "/home/projects", method = RequestMethod.GET)
     public ModelAndView projectsPage() {
@@ -36,6 +38,20 @@ public class ProjectController {
         model.addObject("title", "Projects - Simple Tracker");
         model.addObject("projectsList", projectService.loadProjectList());
         model.setViewName("projects");
+        return model;
+
+    }
+
+    @RequestMapping(value = "/home/projects/my", method = RequestMethod.GET)
+    public ModelAndView myProjectsPage() {
+
+        ModelAndView model = new ModelAndView();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = user.getUsername();
+        Employee employee = userService.findUserByLogin(name);
+        model.addObject("title", "My Projects - Simple Tracker");
+        model.addObject("members", employee.getMembers());
+        model.setViewName("myprojects");
         return model;
 
     }
@@ -57,8 +73,10 @@ public class ProjectController {
         ModelAndView model = new ModelAndView("redirect:/admin/projects/createProject");
 
         if (bindingResult.hasErrors()) {
+            createProjectPage().addObject("error", "Check the values, man");
             return createProjectPage();
         }
+
         Project project = new Project();
         project.setName(projectForm.getName());
         project.setDescription(projectForm.getDescription());
@@ -70,7 +88,7 @@ public class ProjectController {
 
     }
 
-    @RequestMapping(value = "/admin/projects/deleteProject/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/projects/deleteProject/{id}", method = RequestMethod.POST)
     public ModelAndView deleteProject(@PathVariable Integer id) {
 
         ModelAndView model = new ModelAndView("redirect:/home/projects");
@@ -79,18 +97,27 @@ public class ProjectController {
 
     }
 
-    @RequestMapping(value = "/admin/projects/changeStatus/{id}/{statusId}", method = RequestMethod.GET)
-    public ModelAndView suspendProject(@PathVariable Integer id, @PathVariable Integer statusId) {
+    @RequestMapping(value = "/admin/projects/changeStatus/{id}/{statusId}", method = RequestMethod.POST)
+    public ModelAndView changeProjectStatus(@PathVariable Integer id, @PathVariable Integer statusId) {
 
         ModelAndView model = new ModelAndView("redirect:/home/projects/projectdetails/"+id);
         Project project = projectService.getProjectById(id);
         Status status = statusService.getStatusById(statusId);
-        project.setStatus(status);
-        Set<Task> tasks = project.getTasks();
+        if ("Completed".equals(status.getName())) {
+            project.setAed(new Date(new java.util.Date().getTime()));
+        }
+        if ("In progress".equals(status.getName())) {
+            project.setAed(null);
+        }
+        /*Set<Task> tasks = project.getTasks();
         for (Task task: tasks) {
             task.setStatus(status);
+            if ("Completed".equals(status.getName())) {
+                task.setAed(new Date(new java.util.Date().getTime()));
+            }
             taskService.addTask(task);
-        }
+        }*/
+        project.setStatus(status);
         projectService.addProject(project);
         return model;
 
@@ -101,6 +128,7 @@ public class ProjectController {
 
         ModelAndView model = new ModelAndView("projectDetails");
         Project project = projectService.getProjectById(id);
+        model.addObject("title", "Projects Details - Simple Tracker");
         model.addObject("project", project);
         return model;
 
@@ -110,7 +138,6 @@ public class ProjectController {
     public ModelAndView projectDetails() {
 
         ModelAndView model = new ModelAndView("projectDetails");
-        model.addObject("title", "Project Details - Simple Tracker");
         return model;
 
     }

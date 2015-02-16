@@ -14,4 +14,6 @@ public interface MemberService {
     void deleteMember(Integer id);
 
     List<Project> loadProjectMemberList(Employee user);
+
+    Member getMemberById(int memberId);
 }

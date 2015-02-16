@@ -1,9 +1,18 @@
 body {
     padding-top: 20px;
     padding-bottom: 20px;
+    color: dimgray;
 }
 
 .navbar {
     margin-bottom: 20px;
     /*background-color: #D0F0C0;*/
+}
+
+.inlineForm {
+    display: inline;
+}
+
+.issueTable {
+    width: 50%;
 }

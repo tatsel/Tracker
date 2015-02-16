@@ -5,6 +5,7 @@ import by.epamlab.projects.model.Status;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "task", catalog = "trackerdb1")
@@ -19,11 +20,12 @@ public class Task {
     private Date ped;
     private Date aed;
     private Status status;
+    private Set<Attachment> attachments;
 
     public Task() {
     }
 
-    public Task(Integer id, Project project, String description, String summary, Date psd, Date asd, Date ped, Date aed, Status status) {
+    public Task(Integer id, Project project, String description, String summary, Date psd, Date asd, Date ped, Date aed, Status status, Set<Attachment> attachments) {
         this.id = id;
         this.project = project;
         this.description = description;
@@ -33,6 +35,7 @@ public class Task {
         this.ped = ped;
         this.aed = aed;
         this.status = status;
+        this.attachments = attachments;
     }
 
     @Id
@@ -118,5 +121,14 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "task")
+    public Set<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
     }
 }

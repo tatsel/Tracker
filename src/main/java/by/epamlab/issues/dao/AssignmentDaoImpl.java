@@ -23,16 +23,16 @@ public class AssignmentDaoImpl implements AssignmentDao {
 
     @Override
     public void addAssignment(Assignment assignment) {
-        sessionFactory.getCurrentSession().save(assignment);
+        sessionFactory.getCurrentSession().saveOrUpdate(assignment);
     }
 
-    @Override
+    /*@Override
     public Assignment getLastAssignment() {
         Assignment assignment = (Assignment)sessionFactory.getCurrentSession()
                 .createQuery("from Assignment where id = (select max(id) from Assignment)")
                 .uniqueResult();
         return assignment;
-    }
+    }*/
 
     @Override
     public Assignment getAssignmentById(Integer id) {

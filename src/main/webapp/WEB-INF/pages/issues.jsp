@@ -9,35 +9,26 @@
 
 <div class="container-fluid">
     <jsp:include page="includes/navbar.jsp"></jsp:include>
-    <div class="jumbotron">
-
+    <div class="well">
+        <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/home/issues/createIssue">Create New Issue</a> <br><br>
         <p class="lead">Issues:</p>
-        <a href="${pageContext.request.contextPath}/home/issues/createIssue">Create Issue</a>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Project Name</th>
                 <th>Task Summary</th>
-                <th>PSD</th>
-                <th>PED</th>
-                <th>ASD</th>
-                <th>AED</th>
-                <th>Task Description</th>
+                <th>Project Name</th>
                 <th>Status</th>
+                <th>Task Description</th>
                 <th>Assignee</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${assignmentsList}" var="assignment">
                 <tr>
-                    <td>${assignment.task.project.name}</td>
                     <td><a href="<c:url value='${pageContext.request.contextPath}/home/issues/issuedetails/${assignment.id}'/>">${assignment.task.summary}</a></td>
-                    <td>${assignment.task.psd}</td>
-                    <td>${assignment.task.ped}</td>
-                    <td>${assignment.task.asd}</td>
-                    <td>${assignment.task.aed}</td>
-                    <td>${assignment.task.description}</td>
+                    <td><a href="<c:url value='${pageContext.request.contextPath}/home/projects/projectdetails/${assignment.task.project.id}'/>">${assignment.task.project.name}</a></td>
                     <td>${assignment.task.status.name}</td>
+                    <td>${assignment.task.description}</td>
                     <td>${assignment.member.employee.login}</td>
                 </tr>
             </c:forEach>

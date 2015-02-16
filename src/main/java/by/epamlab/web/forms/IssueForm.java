@@ -1,7 +1,9 @@
 package by.epamlab.web.forms;
 
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.ScriptAssert;
 
+import javax.validation.constraints.NotNull;
+@ScriptAssert(lang = "javascript", script = "_this.psd <= _this.ped")
 public class IssueForm {
     @NotNull
     private int project;

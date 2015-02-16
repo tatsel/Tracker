@@ -43,6 +43,18 @@ public class HelloController {
         return model;
     }
 
+    @RequestMapping(value = { "/home/mypage" }, method = RequestMethod.GET)
+    public ModelAndView myPage() {
+        ModelAndView model = new ModelAndView();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = user.getUsername();
+        Employee employee = userService.findUserByLogin(name);
+        model.addObject("title", "My Page - Simple Tracker");
+        model.addObject("employee", employee);
+        model.setViewName("mypage");
+        return model;
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginPage() {
         ModelAndView model = new ModelAndView();

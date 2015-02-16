@@ -4,6 +4,7 @@ import by.epamlab.projects.model.Member;
 import by.epamlab.projects.service.MemberService;
 import by.epamlab.projects.service.ProjectService;
 import by.epamlab.projects.service.RoleService;
+import by.epamlab.users.model.Employee;
 import by.epamlab.users.service.UserService;
 import by.epamlab.web.forms.MemberForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping
@@ -32,9 +35,11 @@ public class MemberController {
      public ModelAndView createMemberPage(@PathVariable Integer id) {
 
         ModelAndView model = new ModelAndView();
+        List<Employee> employees = userService.loadUsersNotMembers(projectService.getProjectById(id));
         model.addObject("project", projectService.getProjectById(id));
         model.addObject("roles", roleService.loadRoleList());
-        model.addObject("employees", userService.loadUsersNotMembers(projectService.getProjectById(id)));
+        model.addObject("employees", employees);
+        model.addObject("noEmployees", employees.isEmpty());
         model.addObject("memberForm", new MemberForm());
         model.addObject("title", "Create Member - Simple Tracker");
         model.setViewName("createMember");
@@ -59,7 +64,7 @@ public class MemberController {
 
     }
 
-    @RequestMapping(value = "/admin/projects/deleteMember/{projectId}/{memberId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/projects/deleteMember/{projectId}/{memberId}", method = RequestMethod.POST)
     public ModelAndView deleteMember(@PathVariable Integer projectId, @PathVariable Integer memberId) {
 
         ModelAndView model = new ModelAndView("redirect:/home/projects/projectdetails/"+projectId);

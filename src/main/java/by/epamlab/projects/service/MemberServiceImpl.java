@@ -34,7 +34,8 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<Project> loadProjectMemberList(Employee user) {
-        /* load projects in which user is teamlead or manager */
+        /* load projects in which user is teamlead or manager
+        * and which are not completed*/
         List<Member> members = memberDao.getMembers();
         List<Project> projects = new ArrayList<Project>();
         for (Member member: members) {
@@ -45,5 +46,10 @@ public class MemberServiceImpl implements MemberService{
             }
         }
         return projects;
+    }
+
+    @Override
+    public Member getMemberById(int memberId) {
+        return memberDao.getMemberById(memberId);
     }
 }

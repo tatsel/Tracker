@@ -2,6 +2,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <jsp:include page="includes/head.jsp"></jsp:include>
@@ -13,18 +14,16 @@
 
         <h1>${project.name}</h1>
         <sec:authorize access="hasRole('SUPERADMIN')">
-            <a role="button" class="btn btn-default" href="${pageContext.request.contextPath}/admin/projects/changeStatus/${project.id}/3"
-               <c:if test="${project.status.name != 'In progress'}">disabled="disabled"</c:if>>
-                Suspend
-            </a>
-            <a role="button" class="btn btn-default" href="${pageContext.request.contextPath}/admin/projects/changeStatus/${project.id}/2"
-               <c:if test="${project.status.name != 'Suspended'}">disabled="disabled"</c:if>>
-                Continue
-            </a>
-            <a role="button" class="btn btn-default" href="${pageContext.request.contextPath}/admin/projects/changeStatus/${project.id}/4"
-               <c:if test="${project.status.name eq 'Completed'}">disabled="disabled"</c:if>>
-                Complete
-            </a></br></br>
+            <form:form action="${pageContext.request.contextPath}/admin/projects/changeStatus/${project.id}/3" method="post" class="inlineForm">
+                <input type="submit" class="btn btn-default" value="Suspend" <c:if test="${project.status.name != 'In progress'}">disabled="disabled"</c:if> />
+            </form:form>
+            <form:form action="${pageContext.request.contextPath}/admin/projects/changeStatus/${project.id}/2" method="post" class="inlineForm">
+                <input type="submit" class="btn btn-default" value="Continue" <c:if test="${project.status.name eq 'In progress' or project.status.name eq 'Not started'}">disabled="disabled"</c:if> />
+            </form:form>
+            <form:form action="${pageContext.request.contextPath}/admin/projects/changeStatus/${project.id}/4" method="post" class="inlineForm">
+                <input type="submit" class="btn btn-default" value="Complete" <c:if test="${project.status.name eq 'Completed'}">disabled="disabled"</c:if> />
+            </form:form>
+            </br>
         </sec:authorize>
 
         <table class="table table-striped">
@@ -63,7 +62,11 @@
                 <th>Last Name</th>
                 <th>Position</th>
                 <th>Project Role</th>
-                <th>Delete Member</th>
+                <sec:authorize access="hasRole('SUPERADMIN')">
+                    <form:form action="${pageContext.request.contextPath}/admin/projects/deleteMember/${project.id}/${member.id}" method="post">
+                        <th>Delete Member</th>
+                    </form:form>
+                </sec:authorize>
             </tr>
             </thead>
             <tbody>
@@ -75,7 +78,9 @@
                     <td>${member.employee.position.name}</td>
                     <td>${member.role.name}</td>
                     <sec:authorize access="hasRole('SUPERADMIN')">
-                        <td><a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/admin/projects/deleteMember/${project.id}/${member.id}">Delete</a></td>
+                        <form:form action="${pageContext.request.contextPath}/admin/projects/deleteMember/${project.id}/${member.id}" method="post">
+                            <td><input type="submit" class="btn btn-danger btn-xs" value="Delete" /></td>
+                        </form:form>
                     </sec:authorize>
                 </tr>
             </c:forEach>

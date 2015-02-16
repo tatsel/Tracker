@@ -10,4 +10,8 @@ public interface TaskService {
     void addTask(Task task);
 
     Task getLastTask();
+
+    Task getTaskById(Integer id);
+
+    void deleteTask(Integer id);
 }

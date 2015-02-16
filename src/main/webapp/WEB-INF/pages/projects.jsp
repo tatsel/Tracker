@@ -2,6 +2,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <jsp:include page="includes/head.jsp"></jsp:include>
@@ -32,7 +33,9 @@
                     <td>${project.description}</td>
                     <td>${project.status.name}</td>
                     <sec:authorize access="hasRole('SUPERADMIN')">
-                        <td><a href="<c:url value='${pageContext.request.contextPath}/admin/projects/deleteProject/${project.id}'/>"><button class="btn btn-danger btn-xs">Delete</button></a></td>
+                        <form:form action="${pageContext.request.contextPath}/admin/projects/deleteProject/${project.id}" method="post">
+                            <td><input type="submit" class="btn btn-danger btn-xs" value="Delete" /></td>
+                        </form:form>
                     </sec:authorize>
                 </tr>
             </c:forEach>

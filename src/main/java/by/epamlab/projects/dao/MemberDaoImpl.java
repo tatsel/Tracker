@@ -39,4 +39,13 @@ public class MemberDaoImpl implements MemberDao {
     public void addMember(Member member) {
         sessionFactory.getCurrentSession().save(member);
     }
+
+    @Override
+    public Member getMemberById(int memberId) {
+        Member member = (Member)sessionFactory.getCurrentSession()
+                .createQuery("from Member where id =:id")
+                .setString("id", String.valueOf(memberId))
+                .uniqueResult();
+        return member;
+    }
 }

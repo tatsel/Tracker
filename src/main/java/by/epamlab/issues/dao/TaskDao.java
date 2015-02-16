@@ -10,4 +10,8 @@ public interface TaskDao {
     void addTask(Task task);
 
     Task getLastTask();
+
+    Task getTaskById(Integer id);
+
+    void deleteTask(Integer id);
 }

@@ -21,11 +21,11 @@
                 <label for="description">Description:</label>
                 <form:input path="description" class="form-control"/>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="datepicker-container">
                 <label for="psd">PSD:</label>
                 <form:input path="psd" class="form-control"/>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="datepicker-container">
                 <label for="ped">PED:</label>
                 <form:input path="ped" class="form-control"/>
             </div>

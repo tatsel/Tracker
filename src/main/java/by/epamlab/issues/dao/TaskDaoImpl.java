@@ -31,6 +31,21 @@ public class TaskDaoImpl implements TaskDao {
                 .createQuery("from Task where id = (select max(id) from Task)")
                 .uniqueResult();
         return task;
+    }
 
+    @Override
+    public Task getTaskById(Integer id) {
+        Task task = (Task)sessionFactory.getCurrentSession()
+                .createQuery("from Task where id = :id")
+                .setString("id", String.valueOf(id))
+                .uniqueResult();
+        return task;
+    }
+
+    @Override
+    public void deleteTask(Integer id) {
+        sessionFactory.getCurrentSession()
+                .createQuery("delete from Task where id= :id")
+                .setString("id", Integer.toString(id)).executeUpdate();
     }
 }

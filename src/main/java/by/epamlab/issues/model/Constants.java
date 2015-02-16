@@ -8,4 +8,5 @@ public class Constants {
     public static final String ACTIVITY_SUSPEND = "suspended issue";
     public static final String ACTIVITY_COMPLETE = "completed issue";
 
+    public static final String ACTIVITY_CONTINUE = "continued progress";
 }

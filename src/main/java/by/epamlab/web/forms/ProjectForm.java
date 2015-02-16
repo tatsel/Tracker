@@ -1,8 +1,10 @@
 package by.epamlab.web.forms;
 
+import org.hibernate.validator.constraints.ScriptAssert;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
+@ScriptAssert(lang = "javascript", script = "_this.psd <= _this.ped")
 public class ProjectForm {
 
     @NotNull
@@ -17,9 +19,6 @@ public class ProjectForm {
 
     @NotNull
     private String ped;
-
-    /*@NotNull
-    private String status;*/
 
     public ProjectForm() {
     }
@@ -56,11 +55,4 @@ public class ProjectForm {
         this.ped = ped;
     }
 
-    /*public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }*/
 }

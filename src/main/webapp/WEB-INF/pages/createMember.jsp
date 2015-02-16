@@ -10,7 +10,13 @@
 
 <div class="container-fluid">
     <jsp:include page="includes/navbar.jsp" />
-    <div class="jumbotron">
+    <div class="well">
+        <c:if test="${noEmployees}">
+            <p>Sorry, there are no any employees to add</p>
+            <a class="btn btn-primary btn-sm" role="button" href="${pageContext.request.contextPath}/home/projects/projectdetails/${project.id}">Back to project</a>
+
+        </c:if>
+        <c:if test="${!noEmployees}">
         <p class="lead">Add member for project ${project.name}:</p>
         <form:form action="${pageContext.request.contextPath}/admin/projects/addMember/${project.id}" method="post" modelAttribute="memberForm">
 
@@ -35,6 +41,8 @@
 
         </form:form>
     </div>
+        </c:if>
+
 <jsp:include page="includes/foot.jsp"></jsp:include>
 </body>
 </html>

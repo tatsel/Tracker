@@ -9,7 +9,7 @@ public interface AssignmentService {
 
     void addAssignment(Assignment assignment);
 
-    Assignment getLastAssignment();
+   // Assignment getLastAssignment();
 
     Assignment getAssignmentById(Integer id);
 }

@@ -9,7 +9,7 @@ public interface AssignmentDao {
 
     void addAssignment(Assignment assignment);
 
-    Assignment getLastAssignment();
+    /*Assignment getLastAssignment();*/
 
     Assignment getAssignmentById(Integer id);
 }

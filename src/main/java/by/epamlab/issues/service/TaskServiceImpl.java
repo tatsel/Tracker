@@ -27,4 +27,14 @@ public class TaskServiceImpl implements TaskService {
     public Task getLastTask() {
         return taskDao.getLastTask();
     }
+
+    @Override
+    public Task getTaskById(Integer id) {
+        return taskDao.getTaskById(id);
+    }
+
+    @Override
+    public void deleteTask(Integer id) {
+        taskDao.deleteTask(id);
+    }
 }
